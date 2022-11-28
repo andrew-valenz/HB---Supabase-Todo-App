@@ -19,7 +19,7 @@ todoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const data = new
-    formData(form);
+    formData(todo);
         const todo = data.get('todo');
         const rating = 
     // on submit, create a todo, reset the form, and display the todos
@@ -49,6 +49,8 @@ logoutButton.addEventListener('click', () => {
 
 deleteButton.addEventListener('click', async () => {
     // delete all todos
+    await deleteAllTodos();
+    await 
     // modify state to match
     // re displayTodos
 });
