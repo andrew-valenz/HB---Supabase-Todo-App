@@ -20,20 +20,29 @@ export async function createTodo(todo) {
 
 export async function deleteAllTodos() {
     // delete all todos for this user in supabase
+    await client.from('todos').delete().match({ user_id: client.auth.user().id });
     // once you have a response from supabase, comment this back in:
     // return checkError(response);
 }
 
 export async function getTodos() {
+    const response = await client
+        .from('todos')
+        .select('*')
+        .match({ user_id: client.auth.user().id });
     // get all todos for this user from supabase
     // once you have a response from supabase, comment this back in:
-    // return checkError(response);
+    return checkError(response);
 }
 
 export async function completeTodo(id) {
+    const response = await client.from('todos').update({ complete: true }).match({
+        user_id: client.auth.user().id,
+        id: id,
+    });
     // find the and update (set complete to true), the todo that matches the correct id
     // once you have a response from supabase, comment this back in:
-    // return checkError(response);
+    return checkError(response);
 }
 
 export function getUser() {

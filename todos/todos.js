@@ -20,7 +20,7 @@ todoForm.addEventListener('submit', async (e) => {
 
     const data = new
     formData(form);
-        const item = data.get('item');
+        const todo = data.get('todo');
         const rating = 
     // on submit, create a todo, reset the form, and display the todos
 });
