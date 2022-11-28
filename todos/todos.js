@@ -18,15 +18,19 @@ const deleteButton = document.querySelector('.delete-button');
 todoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const data = new
-    formData(todo);
-        const todo = data.get('todo');
-        const rating = 
+    const data = new FormData(todoForm);
+
+    const todo = formData.get('todo');
+
+    await createTodo(todo);
+
+    todoForm.requestFullscreen();
+    displayTodos();
     // on submit, create a todo, reset the form, and display the todos
 });
 
 // create todo state
-const form = document.querySelector('.create-form');
+// const form = document.querySelector('.create-form');
 // add async complete todo handler function
 // call completeTodo
 // swap out todo in array
@@ -34,8 +38,21 @@ const form = document.querySelector('.create-form');
 
 async function displayTodos() {
     // clear the container (.innerHTML = '')
+    const todos = await getTodos();
     // display the list of todos,
+    todosEl.textContent = '';
     // call render function, pass in state and complete handler function!
+    for (let todo of todos){
+        const todoEl = renderTodo(todo);
+
+        todoEl.addEventListener('click', async() => {
+            await completeTodo(todo.id);
+
+            displayTodos();
+        });
+
+        todosEl.append(todoEl);
+    }
     // append to .todos
 }
 
