@@ -71,6 +71,6 @@ deleteButton.addEventListener('click', async () => {
     await deleteAllTodos();
 
     // modify state to match
-    displayTodos;
+    displayTodos();
     // re displayTodos
 });
